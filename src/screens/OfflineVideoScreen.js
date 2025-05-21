@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   RefreshControl,
+  Alert,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import VideoCard from '../components/VideoCard';
@@ -20,6 +21,7 @@ export default function OfflineVideoScreen() {
     state => state.videos,
   );
   const dispatch = useDispatch();
+  const {isOffline} = useSelector(state => state.app);
 
   const loadVideos = useCallback(() => {
     console.log('Loading videos...');
@@ -37,13 +39,17 @@ export default function OfflineVideoScreen() {
     <View style={styles.errorContainer}>
       <Icon name="cloud-offline" size={50} color={colors.gray} />
       <Text style={styles.errorText}>
-        {error ||
-          'Unable to load videos. Please check your internet connection.'}
+        {isOffline
+          ? 'You are offline. Downloaded videos are still available.'
+          : error ||
+            'Unable to load videos. Please check your internet connection.'}
       </Text>
-      <TouchableOpacity style={styles.retryButton} onPress={loadVideos}>
-        <Icon name="refresh" size={20} color="#fff" />
-        <Text style={styles.retryText}>Retry</Text>
-      </TouchableOpacity>
+      {!isOffline && (
+        <TouchableOpacity style={styles.retryButton} onPress={loadVideos}>
+          <Icon name="refresh" size={20} color="#fff" />
+          <Text style={styles.retryText}>Retry</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 
@@ -62,6 +68,20 @@ export default function OfflineVideoScreen() {
 
   return (
     <View style={styles.container}>
+      {isOffline && (
+        <View
+          style={{
+            padding: 8,
+            backgroundColor: '#ffe0e0',
+            alignItems: 'center',
+            borderRadius: 10,
+            marginBottom: 10,
+          }}>
+          <Text style={{color: '#d00'}}>
+            You are offline. Downloaded videos are available.
+          </Text>
+        </View>
+      )}
       <FlatList
         data={items}
         keyExtractor={item => item.id}
