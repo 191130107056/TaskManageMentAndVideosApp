@@ -1,3 +1,27 @@
+# Task App with Date, Time, and Videos
+
+## Setup & Installation
+
+1. Clone the repo:
+   ```sh
+   git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+   cd YOUR_REPO_NAME
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   # or
+   yarn install
+   ```
+3. Run the app:
+   ```sh
+   npx react-native run-android
+   # or
+   npx react-native run-ios
+   ```
+
+## Architecture & Folder Structure
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
@@ -66,7 +90,7 @@ This is one way to run your app — you can also build it directly from Android 
 
 Now that you have successfully run the app, let's make changes!
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
 
 When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
 
@@ -95,3 +119,44 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+## Features
+
+- Add, edit, and delete tasks with date, time, color, and priority
+- Bottom sheet for task creation and editing
+- Offline video download and playback
+- Responsive, modern UI
+- Offline/online detection and fallback behavior
+- Persistent storage for tasks and downloaded videos
+
+## Design/Architecture Decisions
+
+- **Redux Toolkit** for state management and async logic
+- **AsyncStorage** for local persistence of tasks and videos
+- **React Navigation** for screen and tab navigation
+- **Functional components** and React hooks for maintainability
+- **Separation of concerns**: UI, logic, and storage are modularized
+- **Custom hooks** for task management logic
+- **PropTypes** for component type safety
+
+## Potential Improvements & Future Work
+
+- Add user authentication and cloud sync
+- Push notifications for reminders
+- More robust error handling and user feedback
+- Unit and integration tests
+- Improved accessibility and localization
+- Enhanced video management (e.g., streaming, categories)
+
+---
+
+## Notes
+
+- Make sure you have completed the [React Native environment setup](https://reactnative.dev/docs/environment-setup) before running the app.
+- If you encounter issues, see the [Troubleshooting guide](https://reactnative.dev/docs/troubleshooting).
+
+---
+
+## License
+
+This project is for educational/demo purposes.

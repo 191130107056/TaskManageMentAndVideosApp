@@ -1,0 +1,18 @@
+export default {
+  primary: '#6C63FF',
+  secondary: '#FFD600',
+  background: '#F8F8F8',
+  card: '#FFFFFF',
+  text: '#000000',
+  gray: '#8E8E93',
+  green: '#4CD964',
+  red: '#FF3B30',
+  purple: '#6C63FF',
+  yellow: '#FFD600',
+  pink: '#FFB6C1',
+  blue: '#00BFFF',
+  lightGreen: '#B2FF59',
+  border: '#E5E5EA',
+  success: '#34C759',
+  error: '#FF3B30',
+};
