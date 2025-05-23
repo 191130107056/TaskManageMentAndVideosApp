@@ -10,6 +10,8 @@ import {
   Modal,
   Dimensions,
   Alert,
+  PermissionsAndroid,
+  Platform,
 } from 'react-native';
 import RNFS from 'react-native-fs';
 import Video from 'react-native-video';
@@ -39,6 +41,24 @@ const VideoCard = React.memo(({video, isDownloaded, isOffline}) => {
     }
 
     try {
+      // Handle permissions for Android
+      if (Platform.OS === 'android') {
+        if (Platform.Version >= 33) {
+          // Android 13 and above
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.READ_MEDIA_VIDEO,
+          );
+          if (granted !== PermissionsAndroid.RESULTS.GRANTED) return;
+        } else {
+          // Android 12 and below
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+          );
+          if (granted !== PermissionsAndroid.RESULTS.GRANTED) return;
+        }
+      }
+
+      // If permission granted, proceed with download
       setDownloading(true);
       const path = `${RNFS.DocumentDirectoryPath}/${video.id}.mp4`;
 
@@ -73,14 +93,12 @@ const VideoCard = React.memo(({video, isDownloaded, isOffline}) => {
       if (result.statusCode === 200) {
         dispatch(addDownloaded({...video, localPath: path}));
       } else {
-        throw new Error('Download failed');
+        // throw new Error('Download failed');
+        alert('ese');
       }
     } catch (error) {
       console.error('Download error:', error);
-      Alert.alert(
-        'Download Failed',
-        'Failed to download video. Please try again.',
-      );
+      Alert.alert('Download Failed', error.message);
     } finally {
       setDownloading(false);
     }
